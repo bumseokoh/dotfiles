@@ -1,0 +1,69 @@
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+	process = git-lfs filter-process
+[user]
+  name = bumseok.oh
+  email = shuttle2212@gmail.com
+[core]
+  excludesfile = $HOME/.gitignore_global
+	editor = nvim 
+	autocrlf = input
+	crlf = input
+
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+[merge]
+  tool = unityyamlmerge
+	ff = no
+
+[mergetool "unityyamlmerge"]
+  trustExitCode = false
+  cmd = '<path to UnityYAMLMerge>' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+
+[push]
+  default = matching
+[alias]
+  st=status
+  ci=commit
+  br=branch
+  co=checkout
+  rb=rebase origin/master
+  unstage=reset HEAD --
+  last=log -1 HEAD
+  l1=log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  l2=log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  meld=!~/git-meld.pl
+  df=difftool
+  fs = flow feature start
+  ff = flow feature finish
+  fp = flow feature publish
+  rs = flow release start
+  rf = flow release finish
+  hs = flow hotfix start
+  hf = flow hotfix finish
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[pull]
+	rebase = false
+	ff = only
+[init]
+	defaultBranch = main
